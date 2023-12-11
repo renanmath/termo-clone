@@ -5,12 +5,17 @@ export const metadata = {
   description: 'Jogo de Palavras',
 }
 
-function RootLayout({children}:{children:React.ReactNode}) {
-  return ( 
-    <div className="p-2">
-      {children}
-    </div>
-   );
+function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang='pt-br'>
+      <body>
+        <div className="p-2">
+          {children}
+        </div>
+      </body>
+    </html>
+
+  );
 }
 
 export default RootLayout;
