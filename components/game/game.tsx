@@ -5,7 +5,7 @@ type GameProps = {
     allWordData: WordData[]
 }
 
-function Game({ allWordData }: GameProps) {
+function Game({ allWordData }: GameProps) {    
     const wordSize = 5
     const numWords = 4
     const frequencyThreshold = 10000
