@@ -2,6 +2,7 @@ import axios from "axios"
 
 import { WORDS_API_URL, WordData } from "@/constants"
 import Game from "@/components/game/game"
+import { GameStateContextProvider } from "@/context/game-state-context"
 
 
 async function Home() {
@@ -17,7 +18,10 @@ async function Home() {
         })
 
         return (
-            <Game allWordData={allWordData} />
+            <GameStateContextProvider>
+                <Game allWordData={allWordData} />
+            </GameStateContextProvider>
+
         );
     }
 

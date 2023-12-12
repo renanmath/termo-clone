@@ -18,6 +18,8 @@ function CharBox({ correctChar, currentValue = "X", isValidated = false, positio
     
     const { gameState, changeGameState } = useGameState()
 
+    const [char, setChar] = useState(gameState.currentChar)
+
     function handleOnClick(){
         const newGameState = {...gameState}
         newGameState.activeColumn = positionInRow
@@ -25,7 +27,7 @@ function CharBox({ correctChar, currentValue = "X", isValidated = false, positio
     }
 
 
-    const borderClass = isValidated ? "border-pink-500" : "border-blue-900";
+    const borderClass = isValidated ? "border-green-300 bg-slate-800" : "border-blue-900";
     const backgroundClass = currentValue === correctChar
         ? "bg-slate-300"
         : "bg-slate-900";
@@ -37,7 +39,7 @@ function CharBox({ correctChar, currentValue = "X", isValidated = false, positio
         <Button
             onClick={handleOnClick}
             className={cn("text-white border border-cyan-900 p-1 bg-slate-900 rounded-sm text-lg font-bold w-[32px] h-[32px] text-center hover:bg-slate-800", borderClass, backgroundClass, shadowClass)}>
-            {correctChar.toUpperCase()}
+            {char.toUpperCase()}
         </Button>
     );
 }

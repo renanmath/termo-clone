@@ -1,3 +1,5 @@
+"use client";
+
 import { GameStateInterface } from '@/constants';
 import { createContext, useContext, useMemo, useState } from 'react';
 

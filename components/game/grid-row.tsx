@@ -3,10 +3,10 @@ import CharBox from "@/components/game/char-box";
 
 type GridRowProps = {
     correctWord: string
-    selectedBoxIndex: number
+    selectedColumnIndex: number
 }
 
-function GridRow({ correctWord, selectedBoxIndex = 0 }: GridRowProps) {
+function GridRow({ correctWord, selectedColumnIndex: selectedBoxIndex = 0 }: GridRowProps) {
     
     return (
         <div className="flex justify-between gap-x-2 px-2 py-1">
