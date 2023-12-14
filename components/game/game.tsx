@@ -1,7 +1,7 @@
 "use client";
 
 import GameBoard from "./game-board"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useGameState } from "@/context/game-state-context";
 
 type GameProps = {
@@ -13,10 +13,10 @@ function Game({ allWords }: GameProps) {
   const numWords = 4
 
   const filteredWords = allWords.filter(w => w.length === wordSize)
-  const listOfWords = Array.from({ length: numWords }, () => {
+  const listOfWords = useMemo(()=>Array.from({ length: numWords }, () => {
     const wordIndex = Math.floor(Math.random() * filteredWords.length)
     return filteredWords[wordIndex]
-  })
+  }), [])
 
   const { gameState, changeGameState } = useGameState()
   console.log("Rendering Game")
