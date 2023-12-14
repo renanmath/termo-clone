@@ -1,7 +1,7 @@
 "use client";
 
 import GameBoard from "./game-board"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useGameState } from "@/context/game-state-context";
 
 type GameProps = {
@@ -20,6 +20,7 @@ function Game({ allWords }: GameProps) {
 
   const { gameState, changeGameState } = useGameState()
   console.log("Rendering Game")
+  const [loading, setLoading] = useState(true)
 
   function validateChar(char: string) {
     return /^[a-zA-Z]$/.test(char);
@@ -43,6 +44,12 @@ function Game({ allWords }: GameProps) {
       document.removeEventListener('keydown', keyDownHandler);
     };
   }, [gameState]);
+
+  useEffect(()=>{setLoading(false)}, [])
+
+  if (loading){
+    return null
+  }
 
   return (
     <div>

@@ -18,8 +18,6 @@ function CharBox({ correctChar, currentValue = "X", isValidated = false, positio
     
     const { gameState, changeGameState } = useGameState()
 
-    const [char, setChar] = useState(gameState.currentChar)
-
     function handleOnClick(){
         const newGameState = {...gameState}
         newGameState.activeColumn = positionInRow
@@ -39,7 +37,7 @@ function CharBox({ correctChar, currentValue = "X", isValidated = false, positio
         <Button
             onClick={handleOnClick}
             className={cn("text-white border border-cyan-900 p-1 bg-slate-900 rounded-sm text-lg font-bold w-[32px] h-[32px] text-center hover:bg-slate-800", borderClass, backgroundClass, shadowClass)}>
-            {char.toUpperCase()}
+            {correctChar.toUpperCase()}
         </Button>
     );
 }
