@@ -10,7 +10,7 @@ type GridRowProps = {
 function GridRow({ correctWord, positionInGrid = 0 }: GridRowProps) {
     
     const { gameState } = useGameState()
-    const rowWord = positionInGrid < gameState.typedWords.length ? gameState.typedWords[positionInGrid] : gameState.currentWord
+    const rowWord = positionInGrid < gameState.typedWords.length ? gameState.typedWords[positionInGrid] : positionInGrid === gameState.typedWords.length ? gameState.currentWord : ""
     
     return (
         <div className="flex justify-between gap-x-2 px-2 py-1">
