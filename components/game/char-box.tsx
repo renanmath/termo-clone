@@ -10,10 +10,9 @@ type CharBoxProps = {
     isValidated: boolean
     positionInRow: number
     rowIndex: number
-    isSelected: boolean
 }
 
-function CharBox({ correctChar, currentValue = "", isValidated = false, positionInRow = 0, rowIndex = 0, isSelected=false }: CharBoxProps) {
+function CharBox({ correctChar, currentValue = "", isValidated = false, positionInRow = 0, rowIndex = 0}: CharBoxProps) {
 
     
     const { gameState, changeGameState } = useGameState()
@@ -23,6 +22,8 @@ function CharBox({ correctChar, currentValue = "", isValidated = false, position
         newGameState.activeColumn = positionInRow
         changeGameState(newGameState)
     }
+
+    const isSelected = gameState.activeColumn == positionInRow
 
 
     const borderClass = isValidated ? "border-green-300 bg-slate-800" : "border-blue-900";
@@ -37,7 +38,7 @@ function CharBox({ correctChar, currentValue = "", isValidated = false, position
         <Button
             onClick={handleOnClick}
             className={cn("text-white border border-cyan-900 p-1 bg-slate-900 rounded-sm text-lg font-bold w-[32px] h-[32px] text-center hover:bg-slate-800", borderClass, backgroundClass, shadowClass)}>
-            {correctChar.toUpperCase()}
+            {currentValue.toUpperCase()}
         </Button>
     );
 }
