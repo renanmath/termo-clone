@@ -9,7 +9,8 @@ export type GameStateInterface = {
     activeRow: number,
     activeColumn: number,
     currentChar: string,
-    typedWord: string
+    currentWord: string,
+    typedWords: string[]
 }
 
 export type GameConfigurationInterface = {

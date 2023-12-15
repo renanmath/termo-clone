@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils"
 import { useGameState } from "@/context/game-state-context";
-import { useCallback, useState } from "react";
 import { Button } from "../ui/button";
 
 type CharBoxProps = {
@@ -10,10 +9,11 @@ type CharBoxProps = {
     currentValue: string
     isValidated: boolean
     positionInRow: number
+    rowIndex: number
     isSelected: boolean
 }
 
-function CharBox({ correctChar, currentValue = "X", isValidated = false, positionInRow = 0, isSelected=false }: CharBoxProps) {
+function CharBox({ correctChar, currentValue = "", isValidated = false, positionInRow = 0, rowIndex = 0, isSelected=false }: CharBoxProps) {
 
     
     const { gameState, changeGameState } = useGameState()

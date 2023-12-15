@@ -18,7 +18,7 @@ function WordGrid({ word, numRows }: WordGridProps) {
                         
                             <GridRow
                                 correctWord={myWord}
-                                selectedColumnIndex={gameState.activeColumn} />
+                                positionInGrid={index} />
                     </div>
                 ))
             }

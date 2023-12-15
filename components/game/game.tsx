@@ -3,6 +3,7 @@
 import GameBoard from "./game-board"
 import { useEffect, useMemo, useState } from "react"
 import { useGameState } from "@/context/game-state-context";
+import { validateChar } from "@/lib/game-utils";
 
 type GameProps = {
   allWords: string[]
@@ -18,22 +19,15 @@ function Game({ allWords }: GameProps) {
     return filteredWords[wordIndex]
   }), [])
 
-  const { gameState, changeGameState } = useGameState()
-  console.log("Rendering Game")
+  const { gameState, changeGameState, updateWord } = useGameState()
   const [loading, setLoading] = useState(true)
 
-  function validateChar(char: string) {
-    return /^[a-zA-Z]$/.test(char);
-  }
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
       console.log('Current stage', gameState);
       if (validateChar(event.key)) {
-        const newState = { ...gameState }
-        newState.currentChar = event.key
-        console.log("New State", newState)
-        changeGameState(newState)
+        updateWord(gameState, event.key, wordSize)
       }
 
     };
