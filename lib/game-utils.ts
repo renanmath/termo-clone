@@ -3,7 +3,7 @@ export function validateChar(char: string) {
   }
 
 export function createNewWord(word:string[], index:number, char:string){
-    const newWord = {...word}
+    const newWord = [...word]
     newWord[index] = char
     return newWord
 }
