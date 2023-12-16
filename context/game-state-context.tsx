@@ -1,6 +1,6 @@
 "use client";
 
-import { GameStateInterface } from '@/constants';
+import { GameStateInterface, MAX_WORD_SIZE } from '@/constants';
 import { createNewWord } from '@/lib/game-utils';
 import { createContext, useContext, useMemo, useState } from 'react';
 
@@ -17,7 +17,7 @@ export function GameStateContextProvider({ children }: { children: React.ReactNo
     const [gameState, setGameState] = useState<GameStateInterface>({
         activeRow: 0,
         activeColumn: 0,
-        currentWord: "",
+        currentWord: Array.from({ length: MAX_WORD_SIZE }, () => ""),
         currentChar: "",
         typedWords: []
     })
@@ -27,13 +27,13 @@ export function GameStateContextProvider({ children }: { children: React.ReactNo
     }
 
     function updateWord(state: GameStateInterface, char: string, size: number) {
-        if (state.currentWord.length < size) {
-            const newWord = createNewWord(state.currentWord, state.activeColumn, char)
-            const newState = { ...state }
-            newState.currentWord = newWord
-            newState.activeColumn = newWord.length % size
-            setGameState(newState)
-        }
+
+        const newWord = createNewWord(state.currentWord, state.activeColumn, char)
+        const newState = { ...state }
+        newState.currentWord = newWord
+        newState.activeColumn = (newState.activeColumn +1) % size
+        setGameState(newState)
+
     }
 
     const contextValue = useMemo(() => {
