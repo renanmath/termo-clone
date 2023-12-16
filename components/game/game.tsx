@@ -30,6 +30,11 @@ function Game({ allWords }: GameProps) {
         updateWord(gameState, event.key, wordSize)
       }
 
+      else if (event.key === 'Backspace'){
+        const newState = {...gameState}
+        newState.currentWord[newState.activeColumn] = ""
+        changeGameState(newState)
+      }
     };
 
     document.addEventListener('keydown', keyDownHandler);
