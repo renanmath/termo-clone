@@ -19,7 +19,6 @@ function GridRow({ correctWord, positionInGrid = 0 }: GridRowProps) {
                         <CharBox
                             correctChar={char}
                             currentValue={rowWord[index]}
-                            isValidated={false}
                             positionInRow={index}
                             rowIndex={positionInGrid}
                              />

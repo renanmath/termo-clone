@@ -7,12 +7,11 @@ import { Button } from "../ui/button";
 type CharBoxProps = {
     correctChar: string
     currentValue: string
-    isValidated: boolean
     positionInRow: number
     rowIndex: number
 }
 
-function CharBox({ correctChar, currentValue = "", isValidated = false, positionInRow = 0, rowIndex = 0}: CharBoxProps) {
+function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex = 0}: CharBoxProps) {
 
     
     const { gameState, changeGameState } = useGameState()
@@ -24,10 +23,11 @@ function CharBox({ correctChar, currentValue = "", isValidated = false, position
     }
 
     const isSelected = gameState.activeColumn == positionInRow
+    const isValidated = gameState.activeRow > rowIndex
 
 
-    const borderClass = isValidated ? "border-green-300 bg-slate-800" : "border-blue-900";
-    const backgroundClass = currentValue === correctChar
+    const borderClass = isValidated ? "border-green-300" : "border-blue-900";
+    const backgroundClass = (currentValue === correctChar) && isValidated
         ? "bg-slate-300"
         : "bg-slate-900";
     const shadowClass = isSelected ? "border-pink-900" : "";
