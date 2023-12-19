@@ -4,9 +4,10 @@ import { useGameState } from "@/context/game-state-context";
 type WordGridProps = {
     word: string,
     numRows: number
+    gridIndex: number
 }
 
-function WordGrid({ word, numRows }: WordGridProps) {
+function WordGrid({ word, numRows, gridIndex }: WordGridProps) {
     const arrayOfWords = Array.from({ length: numRows }, () => word)
     const {gameState} = useGameState()
 
@@ -18,7 +19,8 @@ function WordGrid({ word, numRows }: WordGridProps) {
                         
                             <GridRow
                                 correctWord={myWord}
-                                positionInGrid={index} />
+                                positionInGrid={index}
+                                gridIndex={gridIndex} />
                     </div>
                 ))
             }

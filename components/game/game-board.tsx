@@ -1,7 +1,6 @@
 "use client";
 
 import WordGrid from "@/components/game/word-grid";
-import { GameStateContextProvider } from "@/context/game-state-context";
 
 type GameBoardProps = {
     listOfWords: string[]
@@ -16,7 +15,8 @@ function GameBoard({ listOfWords, numRows }: GameBoardProps) {
                     <div key={index}>
                         <WordGrid
                             word={word}
-                            numRows={numRows} />
+                            numRows={numRows}
+                            gridIndex={index} />
                     </div>
                 ))}
             </div>

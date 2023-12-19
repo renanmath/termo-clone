@@ -5,9 +5,10 @@ import { useGameState } from "@/context/game-state-context";
 type GridRowProps = {
     correctWord: string
     positionInGrid: number
+    gridIndex: number
 }
 
-function GridRow({ correctWord, positionInGrid = 0 }: GridRowProps) {
+function GridRow({ correctWord, positionInGrid = 0, gridIndex = 0 }: GridRowProps) {
     
     const { gameState } = useGameState()
     const rowWord = positionInGrid < gameState.typedWords.length ? gameState.typedWords[positionInGrid] : positionInGrid === gameState.typedWords.length ? gameState.currentWord : ""
@@ -21,6 +22,7 @@ function GridRow({ correctWord, positionInGrid = 0 }: GridRowProps) {
                             currentValue={rowWord[index]}
                             positionInRow={index}
                             rowIndex={positionInGrid}
+                            gridIndex={gridIndex}
                              />
                 </div>
             ))}

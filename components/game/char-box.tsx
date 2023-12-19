@@ -9,9 +9,10 @@ type CharBoxProps = {
     currentValue: string
     positionInRow: number
     rowIndex: number
+    gridIndex: number
 }
 
-function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex = 0}: CharBoxProps) {
+function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex = 0, gridIndex = 0}: CharBoxProps) {
 
     
     const { gameState, changeGameState } = useGameState()
@@ -24,12 +25,13 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
 
     const isSelected = gameState.activeColumn == positionInRow
     const isValidated = gameState.activeRow > rowIndex
-
+    const isCorrect = currentValue === correctChar
+    const isPartialCorrect = !isCorrect && gameState.answers[gridIndex].includes(currentValue)
 
     const borderClass = isValidated ? "border-green-300" : "border-blue-900";
-    const backgroundClass = (currentValue === correctChar) && isValidated
-        ? "bg-slate-300"
-        : "bg-slate-900";
+    const backgroundClass = isCorrect && isValidated
+        ? "bg-green-900"
+        : isPartialCorrect && isValidated? "bg-yellow-800" : "bg-slate-900";
     const shadowClass = isSelected ? "border-pink-900" : "";
 
 
