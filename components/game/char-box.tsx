@@ -12,13 +12,13 @@ type CharBoxProps = {
     gridIndex: number
 }
 
-function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex = 0, gridIndex = 0}: CharBoxProps) {
+function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex = 0, gridIndex = 0 }: CharBoxProps) {
 
-    
+
     const { gameState, changeGameState } = useGameState()
 
-    function handleOnClick(){
-        const newGameState = {...gameState}
+    function handleOnClick() {
+        const newGameState = { ...gameState }
         newGameState.activeColumn = positionInRow
         changeGameState(newGameState)
     }
@@ -28,11 +28,22 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
     const isCorrect = currentValue === correctChar
     const isPartialCorrect = !isCorrect && gameState.answers[gridIndex].includes(currentValue)
 
-    const borderClass = isValidated ? "border-green-300" : "border-blue-900";
-    const backgroundClass = isCorrect && isValidated
-        ? "bg-green-900"
-        : isPartialCorrect && isValidated? "bg-yellow-800" : "bg-slate-900";
-    const shadowClass = isSelected ? "border-pink-900" : "";
+    let borderClass:string, backgroundClass:string, shadowClass:string;
+
+    if (isValidated) {
+        borderClass = "border-green-300";
+        if (isCorrect) {
+            backgroundClass = "bg-green-900";
+        } else if (isPartialCorrect) {
+            backgroundClass = "bg-yellow-800";
+        } else {
+            backgroundClass = "bg-black";
+        }
+    } else {
+        backgroundClass = "bg-slate-900";
+    }
+
+    shadowClass = isSelected ? "border-pink-900" : "";
 
 
     return (
