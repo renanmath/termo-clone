@@ -12,7 +12,8 @@ export type GameStateInterface = {
     activeColumn: number,
     currentChar: string,
     currentWord: string[],
-    typedWords: string[]
+    typedWords: string[],
+    answers: string[]
 }
 
 export type GameConfigurationInterface = {

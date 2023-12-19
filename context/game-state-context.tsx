@@ -19,7 +19,8 @@ export function GameStateContextProvider({ children }: { children: React.ReactNo
         activeColumn: 0,
         currentWord: Array.from({ length: MAX_WORD_SIZE }, () => ""),
         currentChar: "",
-        typedWords: []
+        typedWords: [],
+        answers: []
     })
 
     function changeGameState(state: GameStateInterface) {

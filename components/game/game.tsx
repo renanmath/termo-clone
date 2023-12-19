@@ -23,6 +23,12 @@ function Game({ allWords }: GameProps) {
   const { gameState, changeGameState, updateWord } = useGameState()
   const [loading, setLoading] = useState(true)
 
+  useEffect(()=>{
+    const newState = {...gameState}
+    newState.answers = listOfWords
+    changeGameState(newState)
+  }, [])
+
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
