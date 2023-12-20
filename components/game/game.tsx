@@ -11,10 +11,14 @@ type GameProps = {
 }
 
 function Game({ allWords }: GameProps) {
+  const unidecode = require('unidecode');
+
   const wordSize = 5
   const numWords = 4
 
   const filteredWords = allWords.filter(w => w.length === wordSize)
+  const unidecodedWords = filteredWords.map(w => unidecode(w))
+  
   const listOfWords = useMemo(()=>Array.from({ length: numWords }, () => {
     const wordIndex = Math.floor(Math.random() * filteredWords.length)
     return filteredWords[wordIndex]
@@ -42,13 +46,20 @@ function Game({ allWords }: GameProps) {
         newState.currentWord[newState.activeColumn] = ""
         changeGameState(newState)
       }
-      else if (event.key === 'Enter'){
+      else if (event.key === 'Enter'){        
+        
         const newState = {...gameState}
-        newState.activeRow = newState.activeRow + 1
         const typedWord = newState.currentWord.join("")
-        newState.typedWords.push(typedWord)
-        newState.currentWord = Array.from({ length: MAX_WORD_SIZE }, () => "")
-        changeGameState(newState)
+        if (unidecodedWords.includes(typedWord)){
+          newState.activeRow = newState.activeRow + 1        
+          newState.typedWords.push(typedWord)
+          newState.currentWord = Array.from({ length: MAX_WORD_SIZE }, () => "")
+          changeGameState(newState)
+        }
+        // TODO: use toast here
+        else{
+          console.log("Não é uma palavra válida")
+        }        
       }
     };
 
