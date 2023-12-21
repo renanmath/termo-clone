@@ -4,7 +4,7 @@ import GameBoard from "./game-board"
 import { useEffect, useMemo, useState } from "react"
 import { useGameState } from "@/context/game-state-context";
 import { validateChar } from "@/lib/game-utils";
-import { MAX_WORD_SIZE } from "@/constants";
+import { GameStateInterface, MAX_WORD_SIZE } from "@/constants";
 
 type GameProps = {
   allWords: string[]
@@ -33,6 +33,24 @@ function Game({ allWords }: GameProps) {
     changeGameState(newState)
   }, [])
 
+  function clearBackSpace(state:GameStateInterface){
+    
+    let indexToClear: number = 0
+    
+    if (state.currentWord[state.activeColumn].trim() === ""){
+      indexToClear = Math.max(state.activeColumn-1,0)
+      
+    }
+    else{
+      indexToClear = state.activeColumn
+    }
+    const newStage = {...state}
+    newStage.currentWord[indexToClear] = ""
+    newStage.activeColumn = Math.max(indexToClear-1,0)
+    
+    return newStage
+  }
+
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
@@ -42,8 +60,7 @@ function Game({ allWords }: GameProps) {
       }
 
       else if (event.key === 'Backspace'){
-        const newState = {...gameState}
-        newState.currentWord[newState.activeColumn] = ""
+        const newState = clearBackSpace(gameState)
         changeGameState(newState)
       }
       else if (event.key === 'Enter'){        
