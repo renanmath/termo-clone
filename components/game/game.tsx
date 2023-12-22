@@ -18,8 +18,8 @@ function Game({ allWords }: GameProps) {
 
   const filteredWords = allWords.filter(w => w.length === wordSize)
   const unidecodedWords = filteredWords.map(w => unidecode(w))
-  
-  const listOfWords = useMemo(()=>Array.from({ length: numWords }, () => {
+
+  const listOfWords = useMemo(() => Array.from({ length: numWords }, () => {
     const wordIndex = Math.floor(Math.random() * filteredWords.length)
     return filteredWords[wordIndex]
   }), [])
@@ -27,27 +27,27 @@ function Game({ allWords }: GameProps) {
   const { gameState, changeGameState, updateWord } = useGameState()
   const [loading, setLoading] = useState(true)
 
-  useEffect(()=>{
-    const newState = {...gameState}
+  useEffect(() => {
+    const newState = { ...gameState }
     newState.answers = listOfWords
     changeGameState(newState)
   }, [])
 
-  function clearBackSpace(state:GameStateInterface){
-    
+  function clearBackSpace(state: GameStateInterface) {
+
     let indexToClear: number = 0
-    
-    if (state.currentWord[state.activeColumn].trim() === ""){
-      indexToClear = Math.max(state.activeColumn-1,0)
-      
+
+    if (state.currentWord[state.activeColumn].trim() === "") {
+      indexToClear = Math.max(state.activeColumn - 1, 0)
+
     }
-    else{
+    else {
       indexToClear = state.activeColumn
     }
-    const newStage = {...state}
+    const newStage = { ...state }
     newStage.currentWord[indexToClear] = ""
-    newStage.activeColumn = Math.max(indexToClear-1,0)
-    
+    newStage.activeColumn = Math.max(indexToClear - 1, 0)
+
     return newStage
   }
 
@@ -59,24 +59,32 @@ function Game({ allWords }: GameProps) {
         updateWord(gameState, event.key, wordSize)
       }
 
-      else if (event.key === 'Backspace'){
+      else if (event.key === 'Backspace') {
         const newState = clearBackSpace(gameState)
         changeGameState(newState)
       }
-      else if (event.key === 'Enter'){        
-        
-        const newState = {...gameState}
+      else if (event.key === 'Enter') {
+
+        const newState = { ...gameState }
         const typedWord = newState.currentWord.join("")
-        if (unidecodedWords.includes(typedWord)){
-          newState.activeRow = newState.activeRow + 1        
+
+        if (unidecodedWords.includes(typedWord)) {
+          newState.activeRow = newState.activeRow + 1
           newState.typedWords.push(typedWord)
           newState.currentWord = Array.from({ length: MAX_WORD_SIZE }, () => "")
+
+          for (let i = 0; i < numWords; i++) {
+            if (unidecode(newState.answers[i]) == typedWord) {
+              newState.gridValidation[i] = newState.activeRow-1
+            }
+          }
+
           changeGameState(newState)
         }
         // TODO: use toast here
-        else{
+        else {
           console.log("Não é uma palavra válida")
-        }        
+        }
       }
     };
 
@@ -87,9 +95,9 @@ function Game({ allWords }: GameProps) {
     };
   }, [gameState]);
 
-  useEffect(()=>{setLoading(false)}, [])
+  useEffect(() => { setLoading(false) }, [])
 
-  if (loading){
+  if (loading) {
     return null
   }
 

@@ -29,7 +29,7 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
     const isCorrect = currentValue === unidecode(correctChar)
     const isPartialCorrect = !isCorrect && gameState.answers[gridIndex].includes(currentValue)
 
-    let borderClass:string, backgroundClass:string, shadowClass:string;
+    let borderClass:string="", backgroundClass:string="", shadowClass:string="";
     let char = currentValue
 
     if (isValidated) {
@@ -45,9 +45,13 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
     } else {
         backgroundClass = "bg-slate-900";
     }
+    
+    if (rowIndex > gameState.gridValidation[gridIndex]){
+        char = ""
+        backgroundClass = "bg-slate-900"
+    }
 
     shadowClass = isSelected ? "border-pink-900" : "";
-
 
     return (
 

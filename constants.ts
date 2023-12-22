@@ -1,6 +1,9 @@
 export const WORDS_API_URL = 'https://raw.githubusercontent.com/fserb/pt-br/master/data'
 export const MIN_WORD_SIZE = 5
 export const MAX_WORD_SIZE = 12
+export const MIN_NUM_WORDS = 1
+export const MAX_NUM_WORDS = 4
+
 
 export type WordData = {
     word: string
@@ -13,7 +16,8 @@ export type GameStateInterface = {
     currentChar: string,
     currentWord: string[],
     typedWords: string[],
-    answers: string[]
+    answers: string[],
+    gridValidation: number[]
 }
 
 export type GameConfigurationInterface = {

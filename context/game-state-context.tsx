@@ -1,6 +1,6 @@
 "use client";
 
-import { GameStateInterface, MAX_WORD_SIZE } from '@/constants';
+import { GameStateInterface, MAX_NUM_WORDS, MAX_WORD_SIZE } from '@/constants';
 import { createNewWord } from '@/lib/game-utils';
 import { createContext, useContext, useMemo, useState } from 'react';
 
@@ -20,7 +20,8 @@ export function GameStateContextProvider({ children }: { children: React.ReactNo
         currentWord: Array.from({ length: MAX_WORD_SIZE }, () => ""),
         currentChar: "",
         typedWords: [],
-        answers: []
+        answers: [],
+        gridValidation: Array.from({ length: MAX_NUM_WORDS }, () => MAX_WORD_SIZE+1)
     })
 
     function changeGameState(state: GameStateInterface) {
