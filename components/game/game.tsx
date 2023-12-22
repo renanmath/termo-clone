@@ -51,12 +51,29 @@ function Game({ allWords }: GameProps) {
     return newStage
   }
 
+  function moveIndex(state: GameStateInterface, delta:number, size:number){
+    const newIndex = Math.max(Math.min(gameState.activeColumn + delta,size-1),0)
+    const newState = {...state}
+    newState.activeColumn = newIndex
+    return newState
+  }
+
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
-      console.log('Current stage', gameState);
+      console.log('Current stage', gameState, event.key);
       if (validateChar(event.key)) {
         updateWord(gameState, event.key, wordSize)
+      }
+
+      else if (event.key=== 'ArrowLeft'){
+        const newState = moveIndex(gameState, -1,wordSize)
+        changeGameState(newState)
+      }
+
+      else if (event.key=== 'ArrowRight'){
+        const newState = moveIndex(gameState, 1,wordSize)
+        changeGameState(newState)
       }
 
       else if (event.key === 'Backspace') {
