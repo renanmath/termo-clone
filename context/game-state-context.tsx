@@ -33,7 +33,7 @@ export function GameStateContextProvider({ children }: { children: React.ReactNo
         const newWord = createNewWord(state.currentWord, state.activeColumn, char)
         const newState = { ...state }
         newState.currentWord = newWord
-        newState.activeColumn = (newState.activeColumn +1) % size
+        newState.activeColumn = Math.min(newState.activeColumn +1, size-1)
         setGameState(newState)
 
     }

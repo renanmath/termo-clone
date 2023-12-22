@@ -46,7 +46,7 @@ function Game({ allWords }: GameProps) {
     }
     const newStage = { ...state }
     newStage.currentWord[indexToClear] = ""
-    newStage.activeColumn = Math.max(indexToClear - 1, 0)
+    newStage.activeColumn = Math.max(indexToClear, 0)
 
     return newStage
   }
