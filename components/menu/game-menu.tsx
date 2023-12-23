@@ -1,12 +1,18 @@
 "use client";
 
-import { OptionSelector } from "@/components/game/option-selector";
+import { OptionSelector } from "@/components/menu/option-selector";
+import { MAX_WORD_SIZE, MIN_WORD_SIZE } from "@/constants";
 
 const configurations = [
     {
+        label: "Quantidade de palavras",
+        options: ["1", "2", "4"],
+        default: "1"
+    },
+    {
         label: "Tamanho da palavra",
-        options: ["4", "5", "6", "7", "8", "9", "10"],
-        default: "4"
+        options: Array.from({ length: MAX_WORD_SIZE - MIN_WORD_SIZE + 1 }, (_, index) => String(index + MIN_WORD_SIZE)),
+        default: String(MIN_WORD_SIZE)
     },
     {
         label: "Linhas adicionais",
@@ -15,7 +21,7 @@ const configurations = [
     }
 ]
 
-function GameNavbar() {
+function GameMenu() {
     return (
     <div className="flex justify-between bg-slate-800 m-1 px-60 py-2 text-blue-600">
         {configurations.map( config => (
@@ -31,4 +37,4 @@ function GameNavbar() {
     </div>);
 }
 
-export default GameNavbar;
+export default GameMenu;
