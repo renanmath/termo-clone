@@ -13,18 +13,17 @@ type GameProps = {
 function Game({ allWords }: GameProps) {
   const unidecode = require('unidecode');
 
-  const wordSize = 5
-  const numWords = 4
+  const { gameState,configurations, changeGameState, updateWord } = useGame()
 
-  const filteredWords = allWords.filter(w => w.length === wordSize)
+  const filteredWords = allWords.filter(w => w.length === configurations.wordSize)
   const unidecodedWords = filteredWords.map(w => unidecode(w))
 
-  const listOfWords = useMemo(() => Array.from({ length: numWords }, () => {
+  const listOfWords = useMemo(() => Array.from({ length: configurations.numWords }, () => {
     const wordIndex = Math.floor(Math.random() * filteredWords.length)
     return filteredWords[wordIndex]
   }), [])
 
-  const { gameState, changeGameState, updateWord } = useGame()
+  
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -63,16 +62,16 @@ function Game({ allWords }: GameProps) {
     const keyDownHandler = (event: KeyboardEvent) => {
       console.log('Current stage', gameState, event.key);
       if (validateChar(event.key)) {
-        updateWord(gameState, event.key, wordSize)
+        updateWord(gameState, event.key, configurations.wordSize)
       }
 
       else if (event.key=== 'ArrowLeft'){
-        const newState = moveIndex(gameState, -1,wordSize)
+        const newState = moveIndex(gameState, -1,configurations.wordSize)
         changeGameState(newState)
       }
 
       else if (event.key=== 'ArrowRight'){
-        const newState = moveIndex(gameState, 1,wordSize)
+        const newState = moveIndex(gameState, 1,configurations.wordSize)
         changeGameState(newState)
       }
 
@@ -91,7 +90,7 @@ function Game({ allWords }: GameProps) {
           newState.currentWord = Array.from({ length: MAX_WORD_SIZE }, () => "")
           newState.activeColumn = 0
 
-          for (let i = 0; i < numWords; i++) {
+          for (let i = 0; i < configurations.numWords; i++) {
             if (unidecode(newState.answers[i]) == typedWord) {
               newState.gridValidation[i] = newState.activeRow-1
             }
@@ -111,7 +110,7 @@ function Game({ allWords }: GameProps) {
     return () => {
       document.removeEventListener('keydown', keyDownHandler);
     };
-  }, [gameState]);
+  }, [gameState, configurations]);
 
   useEffect(() => { setLoading(false) }, [])
 
@@ -123,7 +122,7 @@ function Game({ allWords }: GameProps) {
     <div>
       <GameBoard
         listOfWords={listOfWords}
-        numRows={wordSize + numWords} />
+        numRows={configurations.wordSize + configurations.numWords + configurations.adtionalRows} />
     </div>
   );
 }
