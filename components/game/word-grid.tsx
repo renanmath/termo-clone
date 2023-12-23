@@ -1,5 +1,5 @@
 import GridRow from "@/components/game/grid-row";
-import { useGameState } from "@/context/game-state-context";
+import { useGame } from "@/context/game-context";
 
 type WordGridProps = {
     word: string,
@@ -9,7 +9,7 @@ type WordGridProps = {
 
 function WordGrid({ word, numRows, gridIndex }: WordGridProps) {
     const arrayOfWords = Array.from({ length: numRows }, () => word)
-    const {gameState} = useGameState()
+    const {gameState} = useGame()
 
     return (
         <div>

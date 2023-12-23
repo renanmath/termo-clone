@@ -2,7 +2,7 @@
 
 import GameBoard from "./game-board"
 import { useEffect, useMemo, useState } from "react"
-import { useGameState } from "@/context/game-state-context";
+import { useGame } from "@/context/game-context";
 import { validateChar } from "@/lib/game-utils";
 import { GameStateInterface, MAX_WORD_SIZE } from "@/constants";
 
@@ -24,7 +24,7 @@ function Game({ allWords }: GameProps) {
     return filteredWords[wordIndex]
   }), [])
 
-  const { gameState, changeGameState, updateWord } = useGameState()
+  const { gameState, changeGameState, updateWord } = useGame()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

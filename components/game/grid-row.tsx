@@ -1,5 +1,5 @@
 import CharBox from "@/components/game/char-box";
-import { useGameState } from "@/context/game-state-context";
+import { useGame } from "@/context/game-context";
 
 
 type GridRowProps = {
@@ -10,7 +10,7 @@ type GridRowProps = {
 
 function GridRow({ correctWord, positionInGrid = 0, gridIndex = 0 }: GridRowProps) {
     
-    const { gameState } = useGameState()
+    const { gameState } = useGame()
     const rowWord = positionInGrid < gameState.typedWords.length ? gameState.typedWords[positionInGrid] : positionInGrid === gameState.typedWords.length ? gameState.currentWord : ""
     
     return (

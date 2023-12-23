@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils"
-import { useGameState } from "@/context/game-state-context";
+import { useGame } from "@/context/game-context";
 import { Button } from "../ui/button";
 
 type CharBoxProps = {
@@ -16,7 +16,7 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
 
     const unidecode = require('unidecode');
     
-    const { gameState, changeGameState } = useGameState()
+    const { gameState, changeGameState } = useGame()
 
     function handleOnClick() {
         const newGameState = { ...gameState }
