@@ -89,6 +89,7 @@ function Game({ allWords }: GameProps) {
           newState.activeRow = newState.activeRow + 1
           newState.typedWords.push(typedWord)
           newState.currentWord = Array.from({ length: MAX_WORD_SIZE }, () => "")
+          newState.activeColumn = 0
 
           for (let i = 0; i < numWords; i++) {
             if (unidecode(newState.answers[i]) == typedWord) {
