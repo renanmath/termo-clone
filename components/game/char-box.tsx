@@ -51,7 +51,7 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
         backgroundClass = "bg-slate-900"
     }
 
-    shadowClass = isSelected ? "border-pink-900" : "";
+    shadowClass = isSelected ? "border-white" : "";
 
     return (
 
