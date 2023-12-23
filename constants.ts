@@ -17,12 +17,14 @@ export type GameStateInterface = {
     typedWords: string[],
     answers: string[],
     gridValidation: number[]
+    match: number
 }
 
 export type GameConfigurationInterface = {
     numWords: number,
     wordSize: number,
-    adtionalRows: number
+    adtionalRows: number,
+
 }
 
 export type GameManagerInterface = {

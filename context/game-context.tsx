@@ -22,13 +22,15 @@ export function GameContextProvider({ children }: { children: React.ReactNode })
         currentChar: "",
         typedWords: [],
         answers: [],
-        gridValidation: Array.from({ length: MAX_NUM_WORDS }, () => MAX_WORD_SIZE + 1)
+        gridValidation: Array.from({ length: MAX_NUM_WORDS }, () => MAX_WORD_SIZE + 1),
+        match: 0
     })
 
     const [gameConfigurations, setGameConfigurations] = useState<GameConfigurationInterface>({
         numWords: MIN_NUM_WORDS,
         wordSize: MIN_WORD_SIZE,
-        adtionalRows: 0
+        adtionalRows: 0,
+        
     })
 
     function changeGameState(state: GameStateInterface) {

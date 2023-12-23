@@ -15,13 +15,13 @@ function Game({ allWords }: GameProps) {
 
   const { gameState,configurations, changeGameState, updateWord } = useGame()
 
-  const filteredWords = useMemo(()=>{return allWords.filter(w => w.length === configurations.wordSize)}, [configurations])
+  const filteredWords = useMemo(()=>{return allWords.filter(w => w.length === configurations.wordSize)}, [configurations, gameState.match])
   const unidecodedWords = filteredWords.map(w => unidecode(w))
 
   const listOfWords = useMemo(() => Array.from({ length: configurations.numWords }, () => {
     const wordIndex = Math.floor(Math.random() * filteredWords.length)
     return filteredWords[wordIndex]
-  }), [configurations])
+  }), [configurations, gameState.match])
 
   
   const [loading, setLoading] = useState(true)
@@ -30,7 +30,7 @@ function Game({ allWords }: GameProps) {
     const newState = { ...gameState }
     newState.answers = listOfWords
     changeGameState(newState)
-  }, [configurations])
+  }, [configurations, gameState.match])
 
   function clearBackSpace(state: GameStateInterface) {
 
