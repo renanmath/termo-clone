@@ -15,13 +15,13 @@ function Game({ allWords }: GameProps) {
 
   const { gameState,configurations, changeGameState, updateWord } = useGame()
 
-  const filteredWords = allWords.filter(w => w.length === configurations.wordSize)
+  const filteredWords = useMemo(()=>{return allWords.filter(w => w.length === configurations.wordSize)}, [configurations])
   const unidecodedWords = filteredWords.map(w => unidecode(w))
 
   const listOfWords = useMemo(() => Array.from({ length: configurations.numWords }, () => {
     const wordIndex = Math.floor(Math.random() * filteredWords.length)
     return filteredWords[wordIndex]
-  }), [])
+  }), [configurations])
 
   
   const [loading, setLoading] = useState(true)
@@ -30,7 +30,7 @@ function Game({ allWords }: GameProps) {
     const newState = { ...gameState }
     newState.answers = listOfWords
     changeGameState(newState)
-  }, [])
+  }, [configurations])
 
   function clearBackSpace(state: GameStateInterface) {
 
@@ -57,7 +57,6 @@ function Game({ allWords }: GameProps) {
     return newState
   }
 
-
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
       console.log('Current stage', gameState, event.key);
@@ -65,12 +64,12 @@ function Game({ allWords }: GameProps) {
         updateWord(gameState, event.key, configurations.wordSize)
       }
 
-      else if (event.key=== 'ArrowLeft'){
+      else if (event.key === 'ArrowLeft'){
         const newState = moveIndex(gameState, -1,configurations.wordSize)
         changeGameState(newState)
       }
 
-      else if (event.key=== 'ArrowRight'){
+      else if (event.key === 'ArrowRight'){
         const newState = moveIndex(gameState, 1,configurations.wordSize)
         changeGameState(newState)
       }

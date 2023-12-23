@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils"
 import { useGame } from "@/context/game-context";
 import { Button } from "../ui/button";
+import { useEffect, useState } from "react";
 
 type CharBoxProps = {
     correctChar: string
@@ -14,8 +15,15 @@ type CharBoxProps = {
 
 function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex = 0, gridIndex = 0 }: CharBoxProps) {
 
+    const [loading, setLoading] = useState(true)
+    useEffect(() => { setLoading(false) }, [])
+
+    if (loading) {
+        return null
+    }
+
     const unidecode = require('unidecode');
-    
+
     const { gameState, changeGameState } = useGame()
 
     function handleOnClick() {
@@ -29,7 +37,7 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
     const isCorrect = currentValue === unidecode(correctChar)
     const isPartialCorrect = !isCorrect && gameState.answers[gridIndex].includes(currentValue)
 
-    let borderClass:string="", backgroundClass:string="", shadowClass:string="";
+    let borderClass: string = "", backgroundClass: string = "", shadowClass: string = "";
     let char = currentValue
 
     if (isValidated) {
@@ -45,8 +53,8 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
     } else {
         backgroundClass = "bg-slate-900";
     }
-    
-    if (rowIndex > gameState.gridValidation[gridIndex]){
+
+    if (rowIndex > gameState.gridValidation[gridIndex]) {
         char = ""
         backgroundClass = "bg-slate-900"
     }
