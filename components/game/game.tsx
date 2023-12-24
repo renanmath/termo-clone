@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useGame } from "@/context/game-context";
 import { validateChar } from "@/lib/game-utils";
 import { GameStateInterface, MAX_WORD_SIZE } from "@/constants";
+import { useToast } from "@/components/ui/use-toast"
 
 type GameProps = {
   allWords: string[]
@@ -25,6 +26,14 @@ function Game({ allWords }: GameProps) {
 
   
   const [loading, setLoading] = useState(true)
+  const { toast } = useToast()
+
+  function showToast(){
+    return toast({
+      title: "Ops!",
+      description: "Não é uma palavra válida",
+    })
+  }
 
   useEffect(() => {
     const newState = { ...gameState }
@@ -97,9 +106,8 @@ function Game({ allWords }: GameProps) {
 
           changeGameState(newState)
         }
-        // TODO: use toast here
         else {
-          console.log("Não é uma palavra válida")
+          showToast()          
         }
       }
     };

@@ -4,6 +4,7 @@ import Game from "@/components/game/game"
 import { GameContextProvider } from "@/context/game-context"
 import { useMemo } from "react";
 import GameMenu from "@/components/menu/game-menu";
+import { Toaster } from "@/components/ui/toaster"
 
 
 async function Home() {  
@@ -13,9 +14,9 @@ async function Home() {
     return (
       <GameContextProvider>
         <GameMenu />
+        <Toaster/>
         <Game allWords={allWords} />
       </GameContextProvider>
-
     );
 }
 
