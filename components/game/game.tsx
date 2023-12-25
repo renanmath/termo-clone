@@ -3,10 +3,8 @@
 import GameBoard from "./game-board"
 import { useEffect, useMemo, useState } from "react"
 import { useGame } from "@/context/game-context";
-import { validateChar } from "@/lib/game-utils";
-import { BIG_M, GameStateInterface, MAX_WORD_SIZE } from "@/constants";
-import { useToast } from "@/components/ui/use-toast"
-import { clearBackSpace } from "@/lib/game-utils";
+import { handleEnterAction, validateChar, clearBackSpace, checkEndGame } from "@/lib/game-utils";
+import { GameStateInterface } from "@/constants";
 
 type GameProps = {
   allWords: string[]
@@ -15,9 +13,9 @@ type GameProps = {
 function Game({ allWords }: GameProps) {
   const unidecode = require('unidecode');
 
-  const { gameState,configurations, changeGameState, updateWord } = useGame()
+  const { gameState, configurations, changeGameState, updateWord } = useGame()
 
-  const filteredWords = useMemo(()=>{return allWords.filter(w => w.length === configurations.wordSize)}, [configurations, gameState.match])
+  const filteredWords = useMemo(() => { return allWords.filter(w => w.length === configurations.wordSize) }, [configurations, gameState.match])
   const unidecodedWords = filteredWords.map(w => unidecode(w))
 
   const listOfWords = useMemo(() => Array.from({ length: configurations.numWords }, () => {
@@ -25,34 +23,8 @@ function Game({ allWords }: GameProps) {
     return filteredWords[wordIndex]
   }), [configurations, gameState.match])
 
-  
+
   const [loading, setLoading] = useState(true)
-  const { toast } = useToast()
-
-  function showToast({title, description}: {title:string, description:string}){
-    return toast({
-      title: title,
-      description: description,
-    })
-  }
-
-  function checkEndGame(){
-    const maxRows = configurations.numWords + configurations.wordSize + configurations.adtionalRows
-    
-    let getAllAnswers = true
-    for (let i=0; i< configurations.numWords; i++){
-      if (gameState.gridValidation[i] === BIG_M){
-        getAllAnswers = false
-      }
-    }
-    
-    if ((gameState.activeRow === maxRows-1) || getAllAnswers){
-      showToast({
-        title: "Fim de Jogo",
-        description: "Resposta:\n" + gameState.answers.join(", ")
-      })
-    }
-  }
 
   useEffect(() => {
     const newState = { ...gameState }
@@ -62,9 +34,9 @@ function Game({ allWords }: GameProps) {
   }, [configurations, gameState.match])
 
 
-  function moveIndex(state: GameStateInterface, delta:number, size:number){
-    const newIndex = Math.max(Math.min(gameState.activeColumn + delta,size-1),0)
-    const newState = {...state}
+  function moveIndex(state: GameStateInterface, delta: number, size: number) {
+    const newIndex = Math.max(Math.min(gameState.activeColumn + delta, size - 1), 0)
+    const newState = { ...state }
     newState.activeColumn = newIndex
     return newState
   }
@@ -76,13 +48,13 @@ function Game({ allWords }: GameProps) {
         updateWord(gameState, event.key, configurations.wordSize)
       }
 
-      else if (event.key === 'ArrowLeft'){
-        const newState = moveIndex(gameState, -1,configurations.wordSize)
+      else if (event.key === 'ArrowLeft') {
+        const newState = moveIndex(gameState, -1, configurations.wordSize)
         changeGameState(newState)
       }
 
-      else if (event.key === 'ArrowRight'){
-        const newState = moveIndex(gameState, 1,configurations.wordSize)
+      else if (event.key === 'ArrowRight') {
+        const newState = moveIndex(gameState, 1, configurations.wordSize)
         changeGameState(newState)
       }
 
@@ -91,27 +63,10 @@ function Game({ allWords }: GameProps) {
         changeGameState(newState)
       }
       else if (event.key === 'Enter') {
-
-        const newState = { ...gameState }
-        const typedWord = newState.currentWord.join("")
-
-        if (newState.unidecodedWords.includes(typedWord)) {
-          newState.activeRow = newState.activeRow + 1
-          newState.typedWords.push(typedWord)
-          newState.currentWord = Array.from({ length: MAX_WORD_SIZE }, () => "")
-          newState.activeColumn = 0
-
-          for (let i = 0; i < configurations.numWords; i++) {
-            if (unidecode(newState.answers[i]) == typedWord) {
-              newState.gridValidation[i] = newState.activeRow-1
-            }
-          }
-
+        const newState = handleEnterAction(gameState, configurations)
+        if (newState) {
           changeGameState(newState)
-          checkEndGame()
-        }
-        else {
-          showToast({title:"Ops!", description:"Não é uma palavra válida"})          
+          checkEndGame(newState, configurations)
         }
       }
     };
