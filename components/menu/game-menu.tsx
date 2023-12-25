@@ -3,7 +3,7 @@
 import { OptionSelector } from "@/components/menu/option-selector";
 import { BIG_M, GameConfigurationInterface, MAX_NUM_WORDS, MAX_WORD_SIZE, MIN_WORD_SIZE } from "@/constants";
 import { useGame } from "@/context/game-context";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "../ui/button";
 
 
@@ -60,13 +60,18 @@ function GameMenu() {
             newState.gridValidation = Array.from({ length: MAX_NUM_WORDS }, () => BIG_M)
             changeGameState(newState)
             changeGameConfigurations(nextConfig)
+            newGameButton.current?.blur();
         }        
     }
+
+    const newGameButton = useRef<HTMLButtonElement>(null)
 
     return (
         <div className="flex gap-x-2 justify-between bg-slate-800 py-2 px-16">
             <Button className="bg-slate-600 hover:bg-slate-700"
-            onClick={handleOnClick}>Novo Jogo</Button>
+            onClick={handleOnClick}
+            ref={newGameButton}>Novo Jogo</Button>
+
             <div className="flex justify-between gap-x-16">
                 {configParameters.map(config => (
                     <div key={config.label}>
