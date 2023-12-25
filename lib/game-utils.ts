@@ -41,7 +41,7 @@ export function checkEndGame(gameState: GameStateInterface, configurations: Game
     }
   }
   
-  if ((gameState.activeRow === maxRows-1) || getAllAnswers){
+  if ((gameState.typedWords.length === maxRows) || getAllAnswers){
     toast({
       title: "Fim de Jogo",
       description: "Resposta:\n" + gameState.answers.join(", ")
