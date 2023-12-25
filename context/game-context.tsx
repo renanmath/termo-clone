@@ -23,7 +23,8 @@ export function GameContextProvider({ children }: { children: React.ReactNode })
         typedWords: [],
         answers: [],
         gridValidation: Array.from({ length: MAX_NUM_WORDS }, () => BIG_M),
-        match: 0
+        match: 0,
+        unidecodedWords: []
     })
 
     const [gameConfigurations, setGameConfigurations] = useState<GameConfigurationInterface>({

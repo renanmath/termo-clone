@@ -57,6 +57,7 @@ function Game({ allWords }: GameProps) {
   useEffect(() => {
     const newState = { ...gameState }
     newState.answers = listOfWords
+    newState.unidecodedWords = unidecodedWords
     changeGameState(newState)
   }, [configurations, gameState.match])
 
@@ -94,7 +95,7 @@ function Game({ allWords }: GameProps) {
         const newState = { ...gameState }
         const typedWord = newState.currentWord.join("")
 
-        if (unidecodedWords.includes(typedWord)) {
+        if (newState.unidecodedWords.includes(typedWord)) {
           newState.activeRow = newState.activeRow + 1
           newState.typedWords.push(typedWord)
           newState.currentWord = Array.from({ length: MAX_WORD_SIZE }, () => "")

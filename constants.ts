@@ -25,6 +25,7 @@ export type GameStateInterface = {
     answers: string[],
     gridValidation: number[]
     match: number
+    unidecodedWords: string[]
 }
 
 export type GameConfigurationInterface = {
