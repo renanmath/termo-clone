@@ -1,7 +1,8 @@
 "use client";
 
-import { validateChar } from "@/lib/game-utils";
+import { clearBackSpace, validateChar } from "@/lib/game-utils";
 import { useGame } from "@/context/game-context";
+import { BACKSPACE_SYMBOL } from "@/constants";
 
 export type KeyProps = {
     char: string,
@@ -10,12 +11,16 @@ export type KeyProps = {
 
 function KeyBox({char}: KeyProps) {
 
-    const {gameState, updateWord, configurations} = useGame()
+    const {gameState, changeGameState, updateWord, configurations} = useGame()
 
     function handleOnClick(){
         if (validateChar(char)){
             console.log(gameState)
             updateWord(gameState, char.toLowerCase(), configurations.wordSize)
+        }
+        else if (char.toLowerCase()===BACKSPACE_SYMBOL.toLowerCase()){
+        const newState = clearBackSpace(gameState)
+        changeGameState(newState)
         }
     }
 

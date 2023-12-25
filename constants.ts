@@ -8,6 +8,9 @@ export const MIN_ADTIONAL_LINES = 0
 export const MAX_ADTIONAL_LINES = 2
 export const BIG_M = 1000000
 
+export const BACKSPACE_SYMBOL = "⌫"
+export const ENTER_SYMBOL = "⏎"
+
 export type WordData = {
     word: string
     frequency: number

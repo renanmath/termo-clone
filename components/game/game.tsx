@@ -6,6 +6,7 @@ import { useGame } from "@/context/game-context";
 import { validateChar } from "@/lib/game-utils";
 import { BIG_M, GameStateInterface, MAX_WORD_SIZE } from "@/constants";
 import { useToast } from "@/components/ui/use-toast"
+import { clearBackSpace } from "@/lib/game-utils";
 
 type GameProps = {
   allWords: string[]
@@ -59,23 +60,6 @@ function Game({ allWords }: GameProps) {
     changeGameState(newState)
   }, [configurations, gameState.match])
 
-  function clearBackSpace(state: GameStateInterface) {
-
-    let indexToClear: number = 0
-
-    if (state.currentWord[state.activeColumn].trim() === "") {
-      indexToClear = Math.max(state.activeColumn - 1, 0)
-
-    }
-    else {
-      indexToClear = state.activeColumn
-    }
-    const newStage = { ...state }
-    newStage.currentWord[indexToClear] = ""
-    newStage.activeColumn = Math.max(indexToClear, 0)
-
-    return newStage
-  }
 
   function moveIndex(state: GameStateInterface, delta:number, size:number){
     const newIndex = Math.max(Math.min(gameState.activeColumn + delta,size-1),0)
@@ -154,3 +138,4 @@ function Game({ allWords }: GameProps) {
 }
 
 export default Game;
+

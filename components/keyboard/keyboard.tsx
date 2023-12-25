@@ -1,9 +1,10 @@
 import KeyBox from "@/components/keyboard/key-box";
+import { BACKSPACE_SYMBOL, ENTER_SYMBOL } from "@/constants";
 
 const arrayOfKyes = [
     ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"],
-    ["A", "S", "D", "F", "G", "H", "J", "K", "L", "⌫"],
-    ["Z", "X", "C", "V", "B", "N", "M", "⏎"]
+    ["A", "S", "D", "F", "G", "H", "J", "K", "L", BACKSPACE_SYMBOL],
+    ["Z", "X", "C", "V", "B", "N", "M", ENTER_SYMBOL]
 ]
 
 export type KeyboardRowProps = {
