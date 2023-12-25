@@ -4,7 +4,7 @@ import GameBoard from "./game-board"
 import { useEffect, useMemo, useState } from "react"
 import { useGame } from "@/context/game-context";
 import { validateChar } from "@/lib/game-utils";
-import { BIG_M, GameStateInterface, MAX_NUM_WORDS, MAX_WORD_SIZE } from "@/constants";
+import { BIG_M, GameStateInterface, MAX_WORD_SIZE } from "@/constants";
 import { useToast } from "@/components/ui/use-toast"
 
 type GameProps = {
