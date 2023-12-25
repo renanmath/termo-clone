@@ -1,7 +1,7 @@
 "use client";
 
 import { OptionSelector } from "@/components/menu/option-selector";
-import { GameConfigurationInterface, MAX_WORD_SIZE, MIN_WORD_SIZE } from "@/constants";
+import { BIG_M, GameConfigurationInterface, MAX_NUM_WORDS, MAX_WORD_SIZE, MIN_WORD_SIZE } from "@/constants";
 import { useGame } from "@/context/game-context";
 import { useState } from "react";
 import { Button } from "../ui/button";
@@ -57,6 +57,7 @@ function GameMenu() {
             newState.typedWords = []
             newState.activeRow = 0
             newState.activeColumn = 0
+            newState.gridValidation = Array.from({ length: MAX_NUM_WORDS }, () => BIG_M)
             changeGameState(newState)
             changeGameConfigurations(nextConfig)
         }        

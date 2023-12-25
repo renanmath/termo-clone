@@ -2,7 +2,7 @@ export const MIN_WORD_SIZE = 4
 export const MAX_WORD_SIZE = 7
 export const MIN_NUM_WORDS = 1
 export const MAX_NUM_WORDS = 4
-
+export const BIG_M = 1000000
 
 export type WordData = {
     word: string
