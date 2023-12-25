@@ -1,7 +1,7 @@
 "use client";
 
 import { OptionSelector } from "@/components/menu/option-selector";
-import { BIG_M, GameConfigurationInterface, MAX_NUM_WORDS, MAX_WORD_SIZE, MIN_WORD_SIZE } from "@/constants";
+import { BIG_M, GameConfigurationInterface, MAX_ADTIONAL_LINES, MAX_NUM_WORDS, MAX_WORD_SIZE, MIN_ADTIONAL_LINES, MIN_NUM_WORDS, MIN_WORD_SIZE } from "@/constants";
 import { useGame } from "@/context/game-context";
 import { useRef, useState } from "react";
 import { Button } from "../ui/button";
@@ -16,8 +16,8 @@ function GameMenu() {
     const configParameters = [
         {
             label: "Quantidade de palavras",
-            options: ["1", "2", "4"],
-            default: "1",
+            options: Array.from({ length: MAX_NUM_WORDS - MIN_NUM_WORDS + 1 }, (_, index) => String(index + MIN_NUM_WORDS)),
+            default: String(MIN_NUM_WORDS),
             configuration: "numWords",
             changeFunction: (config: GameConfigurationInterface, value: string) => {
                 const newConfig = { ...config }
@@ -38,8 +38,8 @@ function GameMenu() {
         },
         {
             label: "Linhas adicionais",
-            options: ["0", "1", "2", "3"],
-            default: "0",
+            options: Array.from({ length: MAX_ADTIONAL_LINES - MIN_ADTIONAL_LINES + 1 }, (_, index) => String(index + MIN_ADTIONAL_LINES)),
+            default: String(MIN_ADTIONAL_LINES),
             configuration: "aditionalRows",
             changeFunction: (config: GameConfigurationInterface, value: string) => {
                 const newConfig = { ...config }
