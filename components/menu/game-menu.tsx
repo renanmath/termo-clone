@@ -51,7 +51,6 @@ function GameMenu() {
 
     function handleOnClick() {
         if (nextConfig) {
-            console.log("Novo jogo!")
             const newState = { ...gameState }
             newState.match = newState.match + 1
             newState.typedWords = []

@@ -15,7 +15,6 @@ function KeyBox({ char }: KeyProps) {
 
     function handleOnClick() {
         if (validateChar(char)) {
-            console.log(gameState)
             updateWord(gameState, char.toLowerCase(), configurations.wordSize)
         }
         else if (char.toLowerCase() === BACKSPACE_SYMBOL.toLowerCase()) {

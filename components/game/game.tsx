@@ -43,7 +43,6 @@ function Game({ allWords }: GameProps) {
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
-      console.log('Current stage', gameState, event.key);
       if (validateChar(event.key)) {
         updateWord(gameState, event.key, configurations.wordSize)
       }
