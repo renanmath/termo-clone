@@ -10,7 +10,7 @@ import { Button } from "../ui/button";
 
 
 function GameMenu() {
-    const {gameState, changeGameState, configurations, changeGameConfigurations } = useGame()
+    const { gameState, changeGameState, configurations, changeGameConfigurations } = useGame()
     const [nextConfig, setNextConfig] = useState<GameConfigurationInterface>(configurations)
 
     const configParameters = [
@@ -49,10 +49,10 @@ function GameMenu() {
         }
     ]
 
-    function handleOnClick(){
-        if (nextConfig){
+    function handleOnClick() {
+        if (nextConfig) {
             console.log("Novo jogo!")
-            const newState = {...gameState}
+            const newState = { ...gameState }
             newState.match = newState.match + 1
             newState.typedWords = []
             newState.activeRow = 0
@@ -61,31 +61,33 @@ function GameMenu() {
             changeGameState(newState)
             changeGameConfigurations(nextConfig)
             newGameButton.current?.blur();
-        }        
+        }
     }
 
     const newGameButton = useRef<HTMLButtonElement>(null)
 
     return (
-        <div className="flex gap-x-2 justify-between bg-slate-800 py-2 px-16">
-            <Button className="bg-slate-600 hover:bg-slate-700"
-            onClick={handleOnClick}
-            ref={newGameButton}>Novo Jogo</Button>
+        <div>
+            <div className="flex gap-x-2 justify-between bg-slate-800 py-2 px-16 items-center">
+                <Button className="bg-slate-600 hover:bg-slate-700"
+                    onClick={handleOnClick}
+                    ref={newGameButton}>Novo Jogo</Button>
 
-            <div className="flex justify-between gap-x-16">
-                {configParameters.map(config => (
-                    <div key={config.label}>
-                        <OptionSelector
-                            placeholder={config.label}
-                            options={config.options}
-                            defaultValue={config.default}
-                            onValueChange={(value) => {
-                                const newConfig = config.changeFunction(nextConfig, value)
-                                setNextConfig(newConfig);
-                            }} />
-                    </div>
-                )
-                )}
+                <div className="flex justify-between gap-x-16">
+                    {configParameters.map(config => (
+                        <div key={config.label}>
+                            <OptionSelector
+                                placeholder={config.label}
+                                options={config.options}
+                                defaultValue={config.default}
+                                onValueChange={(value) => {
+                                    const newConfig = config.changeFunction(nextConfig, value)
+                                    setNextConfig(newConfig);
+                                }} />
+                        </div>
+                    )
+                    )}
+                </div>
             </div>
         </div>
     );

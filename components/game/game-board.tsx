@@ -10,7 +10,7 @@ type GameBoardProps = {
 function GameBoard({ listOfWords, numRows }: GameBoardProps) {
 
     return (
-            <div className="flex justify-between mx-32 gap-x-4 p-1 bg-gray-400">
+            <div className="flex justify-center mx-12 mt-6 gap-x-4 p-1">
                 {listOfWords.map((word, index) => (
                     <div key={index}>
                         <WordGrid

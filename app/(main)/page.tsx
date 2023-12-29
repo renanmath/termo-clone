@@ -8,18 +8,21 @@ import { Toaster } from "@/components/ui/toaster"
 import Keyboard from "@/components/keyboard/keyboard";
 
 
-async function Home() {  
+async function Home() {
 
-    const allWords: string[] = useMemo(()=>(FREQUENT_WORDS.split("\n")), [])
+  const allWords: string[] = useMemo(() => (FREQUENT_WORDS.split("\n")), [])
 
-    return (
+  return (
+    <div className="bg-slate-300 h-full w-full pb-24">
       <GameContextProvider>
         <GameMenu />
-        <Toaster/>
+        <Toaster />
         <Game allWords={allWords} />
         <Keyboard />
       </GameContextProvider>
-    );
+    </div>
+
+  );
 }
 
 export default Home;
