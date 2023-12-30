@@ -9,7 +9,6 @@ type WordGridProps = {
 
 function WordGrid({ word, numRows, gridIndex }: WordGridProps) {
     const arrayOfWords = Array.from({ length: numRows }, () => word)
-    const {gameState} = useGame()
 
     return (
         <div>

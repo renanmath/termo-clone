@@ -10,7 +10,7 @@ type GameBoardProps = {
 function GameBoard({ listOfWords, numRows }: GameBoardProps) {
 
     return (
-            <div className="flex flex-wrap gap-x-4">
+            <div className="flex flex-wrap gap-x-2">
                 {listOfWords.map((word, index) => (
                     <div key={index}
                     className="sm:w-1/2 md:w-1/4 p-2 mx-4">
