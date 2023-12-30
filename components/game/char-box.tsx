@@ -42,7 +42,6 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
     let char = currentValue
 
     if (isValidated) {
-        borderClass = "border-green-300";
         if (isCorrect) {
             backgroundClass = "bg-green-900";
             char = correctChar;
