@@ -51,7 +51,7 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
             backgroundClass = "bg-black";
         }
     } else {
-        backgroundClass = "bg-slate-900";
+        backgroundClass = "bg-slate-700";
     }
 
     if (rowIndex > gameState.gridValidation[gridIndex]) {
