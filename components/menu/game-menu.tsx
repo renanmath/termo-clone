@@ -66,13 +66,13 @@ function GameMenu() {
     const newGameButton = useRef<HTMLButtonElement>(null)
 
     return (
-        <div>
-            <div className="flex gap-x-2 justify-between bg-slate-800 py-2 px-16 items-center">
+        <div className="text-xs lg:text-sm">
+            <div className="md:flex gap-x-2 justify-between bg-slate-800 py-2 px-8 lg:px-16 items-center">
                 <Button className="bg-slate-600 hover:bg-slate-700"
                     onClick={handleOnClick}
                     ref={newGameButton}>Novo Jogo</Button>
 
-                <div className="flex justify-between gap-x-16">
+                <div className="md:flex justify-between gap-x-4 lg:gap-x-16">
                     {configParameters.map(config => (
                         <div key={config.label}>
                             <OptionSelector
