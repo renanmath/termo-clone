@@ -13,7 +13,7 @@ export type KeyboardRowProps = {
 
 export function KeyboardRow({ keys }: KeyboardRowProps) {
     return (
-        <div className="flex gap-x-8 justify-center">
+        <div className="flex gap-x-2 lg:gap-x-8 justify-center items-center">
             {keys.map(char => (
                 <div key={char}>
                     <KeyBox char={char} />

@@ -61,12 +61,13 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
     }
 
     shadowClass = isSelected ? "border-white" : "";
+    const baseCss = "text-white border p-1 bg-slate-900 rounded-sm font-bold text-center hover:bg-slate-800"
 
     return (
 
         <Button
             onClick={handleOnClick}
-            className={cn("text-white border border-cyan-900 p-1 bg-slate-900 rounded-sm text-lg font-bold w-[32px] h-[32px] text-center hover:bg-slate-800", borderClass, backgroundClass, shadowClass)}>
+            className={cn("text-xs lg:text-lg w-[20px] lg:w-[32px] h-[20px] lg:h-[32px]",baseCss, borderClass, backgroundClass, shadowClass)}>
             {char.toUpperCase()}
         </Button>
     );
