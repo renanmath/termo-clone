@@ -14,7 +14,7 @@ function GridRow({ correctWord, positionInGrid = 0, gridIndex = 0 }: GridRowProp
     const rowWord = positionInGrid < gameState.typedWords.length ? gameState.typedWords[positionInGrid] : positionInGrid === gameState.typedWords.length ? gameState.currentWord : ""
     
     return (
-        <div className="flex justify-between px-1 lg:py-1">
+        <div className="flex justify-center px-1 lg:py-1">
             {correctWord.split("").map((char, index) => (
                 <div key={index}>
                         <CharBox

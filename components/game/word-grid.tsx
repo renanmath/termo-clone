@@ -1,5 +1,4 @@
 import GridRow from "@/components/game/grid-row";
-import { useGame } from "@/context/game-context";
 
 type WordGridProps = {
     word: string,
@@ -14,8 +13,7 @@ function WordGrid({ word, numRows, gridIndex }: WordGridProps) {
         <div>
             {
                 arrayOfWords.map((myWord, index) => (
-                    <div key={index}>
-                        
+                    <div key={index}>                        
                             <GridRow
                                 correctWord={myWord}
                                 positionInGrid={index}

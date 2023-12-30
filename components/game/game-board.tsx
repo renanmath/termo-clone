@@ -13,7 +13,7 @@ function GameBoard({ listOfWords, numRows }: GameBoardProps) {
             <div className="flex flex-wrap gap-x-1 justify-center">
                 {listOfWords.map((word, index) => (
                     <div key={index}
-                    className="sm:w-1/2 md:w-1/4 p-2 mx-4">
+                    className="sm:w-1/2 md:w-1/4 py-2">
                         <WordGrid
                             word={word}
                             numRows={numRows}
