@@ -17,8 +17,8 @@ async function Home() {
       <GameContextProvider>
         <GameMenu />
         <Toaster />
-        <Game allWords={allWords} />
         <Keyboard />
+        <Game allWords={allWords} />
       </GameContextProvider>
     </div>
 
