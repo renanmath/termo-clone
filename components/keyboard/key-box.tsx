@@ -38,7 +38,7 @@ function KeyBox({ char }: KeyProps) {
 
         <Button
             onClick={handleOnClick}
-            className={cn("text-xs lg:text-lg w-[28px] lg:w-[32px] h-[28px] lg:h-[32px]", baseCss)}>
+            className={cn("text-xs lg:text-lg w-[32px] lg:w-[42px] h-[32px] lg:h-[42px]", baseCss)}>
             {char.toUpperCase()}
         </Button>
     );
