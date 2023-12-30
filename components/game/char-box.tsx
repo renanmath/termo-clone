@@ -67,7 +67,7 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
 
         <Button
             onClick={handleOnClick}
-            className={cn("text-xs lg:text-lg w-[20px] lg:w-[32px] h-[20px] lg:h-[32px]",baseCss, borderClass, backgroundClass, shadowClass)}>
+            className={cn("text-xs lg:text-lg w-[24px] lg:w-[32px] h-[24px] lg:h-[32px]",baseCss, borderClass, backgroundClass, shadowClass)}>
             {char.toUpperCase()}
         </Button>
     );

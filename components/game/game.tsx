@@ -84,7 +84,7 @@ function Game({ allWords }: GameProps) {
   }
 
   return (
-    <div>
+    <div className="justify-center">
       <GameBoard
         listOfWords={listOfWords}
         numRows={configurations.wordSize + configurations.numWords + configurations.adtionalRows} />
