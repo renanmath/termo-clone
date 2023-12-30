@@ -18,13 +18,14 @@ function CharBox({ correctChar, currentValue = "", positionInRow = 0, rowIndex =
     const [loading, setLoading] = useState(true)
     useEffect(() => { setLoading(false) }, [])
 
+    const { gameState, changeGameState } = useGame()
+
     if (loading) {
         return null
     }
 
     const unidecode = require('unidecode');
 
-    const { gameState, changeGameState } = useGame()
 
     function handleOnClick() {
         const newGameState = { ...gameState }
